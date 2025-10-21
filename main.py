@@ -73,7 +73,7 @@ def average_grade(database, student_name):
     avg = sum(grades) / len(grades)
     print(f"Середній бал студента {student_name}: {avg:.2f}")
 
-# Функція Зборик Антон КН-41/2 (зміна даних обраного студента)
+# Функція Зборик Антон КН-41/2 (функція для зміни даних обраного студента)
 def change_student_details (database, key_database, student_name):
     if student_name in database:
         if key_database in database[student_name]:
