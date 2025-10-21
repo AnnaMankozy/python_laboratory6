@@ -64,12 +64,22 @@ def delete_student(database, student_name):
     else:
         print("Студента не знайдено!")
 
+# Функція Братушки Ксенії КН-41/2 (обчислення середнього балу студента)
+def average_grade(database, student_name):
+    if student_name not in database:
+        print("Студента не знайдено!")
+        return
+    grades = database[student_name]["предмети"].values()
+    avg = sum(grades) / len(grades)
+    print(f"Середній бал студента {student_name}: {avg:.2f}")    
+
 #Спільні зміни в основному меню
 while True:
     print("\nМеню:")
     print("Вивести усіх студентів -> 1 <-")
     print("Додати нового студента -> 2 <-")
     print("Видалити студента із записів -> 3 <-")
+    print("Порахувати середній бал студента -> 4 <-")
     print("Вийти з програми -> 0 <-")
 
     choice = input("Введіть пункт меню: ")
@@ -113,6 +123,10 @@ while True:
     elif choice == "3":
         name = input("Введіть ПІБ студента для видалення: ")
         delete_student(students, name)
+
+    elif choice == "4":
+        name = input("Введіть ПІБ студента: ")
+        average_grade(students, name)
     
     elif choice == "0":
         print("Вихід із програми...")
