@@ -71,7 +71,26 @@ def average_grade(database, student_name):
         return
     grades = database[student_name]["предмети"].values()
     avg = sum(grades) / len(grades)
-    print(f"Середній бал студента {student_name}: {avg:.2f}")    
+    print(f"Середній бал студента {student_name}: {avg:.2f}")
+
+# Функція Зборик Антон КН-41/2 (зміна даних обраного студента)
+def change_student_details (database, key_database, student_name):
+    if student_name in database:
+        if key_database in database[student_name]:
+            if key_database == "курс":
+                database[student_name][key_database] = int(input(f"Введіть оновлені дані для {key_database}: "))
+            elif key_database == "предмети":
+                subject_database=input("Введіть предмет, оцінку якого треба змінити: ")
+                if subject_database in database[student_name][key_database]:
+                    database[student_name][key_database][subject_database]= int(input("Введіть оновлену оцінку: "))
+                else:
+                    print("Такого предмета немає!")
+                    return
+            else: database[student_name][key_database] = input(f"Введіть оновлені дані для {key_database}: ")
+
+        else: print("Немає такої властивості!")
+        return
+    else: print("Студента не знайдено!")
 
 #Спільні зміни в основному меню
 while True:
@@ -80,6 +99,7 @@ while True:
     print("Додати нового студента -> 2 <-")
     print("Видалити студента із записів -> 3 <-")
     print("Порахувати середній бал студента -> 4 <-")
+    print("Змінити дані студента -> 5 <-")
     print("Вийти з програми -> 0 <-")
 
     choice = input("Введіть пункт меню: ")
@@ -127,7 +147,15 @@ while True:
     elif choice == "4":
         name = input("Введіть ПІБ студента: ")
         average_grade(students, name)
-    
+
+    elif choice == "5":
+        print("Що можете змінити:")
+        for key in students["Іваненко Петро Петрович"].keys():
+            print(key)
+        student=input("Введіть ПІБ студента, дані якого хочете змінити: ")
+        subject_to_change=input("Введіть назву властивості, яку хочете змінити: ")
+        change_student_details(students, subject_to_change, student)
+
     elif choice == "0":
         print("Вихід із програми...")
         break
