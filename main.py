@@ -56,11 +56,20 @@ def add_student(database, student_name, student_group, student_course, student_s
     }
     print(f"Студента {student_name} додано до бази даних.")
 
+# Функція Снаговської Дар'ї КН-41/2 (видалення студента) 
+def delete_student(database, student_name):
+    if student_name in database:
+        del database[student_name]
+        print(f"Студента {student_name} видалено.")
+    else:
+        print("Студента не знайдено!")
+
 #Спільні зміни в основному меню
 while True:
     print("\nМеню:")
     print("Вивести усіх студентів -> 1 <-")
     print("Додати нового студента -> 2 <-")
+    print("Видалити студента із записів -> 3 <-")
     print("Вийти з програми -> 0 <-")
 
     choice = input("Введіть пункт меню: ")
@@ -101,6 +110,10 @@ while True:
         form_of_study=input("Введіть форму навчання: ")
         add_student(students, name, group, course, subjects, address, numer_of_phone,form_of_financing,form_of_study)
 
+    elif choice == "3":
+        name = input("Введіть ПІБ студента для видалення: ")
+        delete_student(students, name)
+    
     elif choice == "0":
         print("Вихід із програми...")
         break
